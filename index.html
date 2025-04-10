@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wedding Gift Selection</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* Global Styles and Flex Centering */
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #FFC1E3, #B3E5FC);
+      margin: 0;
+      padding: 20px;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+    /* Container with responsive sizing */
+    .container {
+      width: 90%;
+      max-width: 600px;
+      background: #fff;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    h1, h2 {
+      font-family: 'Dancing Script', cursive;
+      color: #D81B60;
+      margin-bottom: 15px;
+      font-size: 2.5rem;
+    }
+    p {
+      font-size: 1.125rem;
+      color: #555;
+      line-height: 1.6;
+    }
+    button {
+      display: block;
+      width: 80%;
+      margin: 20px auto;
+      padding: 12px 20px;
+      background-color: #FF4081;
+      color: #fff;
+      font-size: 1.125rem;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background 0.3s;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    }
+    button:hover {
+      background-color: #E91E63;
+    }
+    .options {
+      margin: 20px 0;
+    }
+    .options label {
+      display: block;
+      margin: 12px 0;
+      font-size: 1.125rem;
+      cursor: pointer;
+    }
+    input[type="radio"] {
+      margin-right: 10px;
+    }
+    .hidden {
+      display: none;
+    }
+    /* Responsive adjustments */
+    @media (max-width: 480px) {
+      h1, h2 {
+        font-size: 2rem;
+      }
+      p,
+      .options label, 
+      button {
+        font-size: 1rem;
+      }
+      .container {
+        padding: 20px;
+      }
+      button {
+        width: 90%;
+      }
+    }
+    @media (min-width: 601px) and (max-width: 1024px) {
+      h1, h2 {
+        font-size: 2.2rem;
+      }
+      p,
+      .options label, 
+      button {
+        font-size: 1.125rem;
+      }
+      .container {
+        padding: 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- This canvas is optional; the library automatically creates one if needed -->
+  <canvas id="confetti-canvas" class="hidden"></canvas>
+
+  <div class="container">
+    <!-- Page 1: Welcome Screen -->
+    <div id="page1">
+      <h1>Dear Panda &amp; Raksha</h1>
+      <p>
+        We are completely out of words to capture the joy we feel about you two getting married—so much so that our keyboards are running low on emojis! Your love fills our hearts with endless laughter, happiness, and all the vibes that brighten our days. We wish you a lifetime of fantastic adventures, spontaneous giggles, and every bit of joy the digital (and real) world can offer.
+      </p>
+      <p><strong>P.S. Raksha, we are so delighted to welcome you to our family.</strong></p>
+      <p>With love,<br>AB, Hindhs, SP</p>
+      <p>
+        Ready to unwrap a little digital surprise from us? Click below to reveal your wedding present and add an extra sparkle to your special day!
+      </p>
+      <button id="startBtn">Unveil Surprise</button>
+    </div>
+    
+    <!-- Page 2: Honeymoon Trip Teaser -->
+    <div id="page2" class="hidden">
+      <h2>Decisions, Decisions...</h2>
+      <p>
+        It was so hard deciding what to gift you guys after hours of discussions and a number of sleepless nights... okay, it wasn't as difficult as it sounds—but yes, to an extent!
+      </p>
+      <p>
+        We have decided to gift you a honeymoon trip, but we need your help in choosing the perfect destination.
+      </p>
+      <p>
+        Ready to get started?
+      </p>
+      <button id="honeymoonBtn">Get Started</button>
+    </div>
+    
+    <!-- Page 3: Travel Preference -->
+    <div id="page3" class="hidden">
+      <h2>Travel Preference</h2>
+      <p>Would you prefer traveling International or Local?</p>
+      <div class="options">
+        <label>
+          <input type="radio" name="travel" value="international"> International
+        </label>
+        <label>
+          <input type="radio" name="travel" value="local"> Local
+        </label>
+      </div>
+      <button id="nextBtn">Next</button>
+    </div>
+    
+    <!-- Page 4: Destination Options Based on Travel Preference -->
+    <div id="page4" class="hidden">
+      <!-- International Options -->
+      <div id="internationalOptions" class="hidden">
+        <h2>International Options</h2>
+        <p>Please choose your preferred destination region:</p>
+        <div class="options">
+          <label><input type="radio" name="internationalChoice" value="Europe"> Europe</label>
+          <label><input type="radio" name="internationalChoice" value="Asia"> Asia</label>
+          <label><input type="radio" name="internationalChoice" value="America"> America</label>
+        </div>
+        <button id="submitInternational">Submit</button>
+      </div>
+      <!-- Local Options -->
+      <div id="localOptions" class="hidden">
+        <h2>Local Options</h2>
+        <p>Please choose your preferred local destination:</p>
+        <div class="options">
+          <label><input type="radio" name="localChoice" value="CityA"> City A</label>
+          <label><input type="radio" name="localChoice" value="CityB"> City B</label>
+          <label><input type="radio" name="localChoice" value="CityC"> City C</label>
+        </div>
+        <button id="submitLocal">Submit</button>
+      </div>
+      <!-- Final Confirmation -->
+      <div id="finalConfirmation" class="hidden">
+        <!-- Final confirmation content will be populated dynamically -->
+      </div>
+    </div>
+  </div>
+  
+  <!-- Load canvas-confetti library from CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+  
+  <script>
+    // Utility: Random in range function
+    function randomInRange(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+    
+    // Page 1 -> Page 2: Welcome to Honeymoon Teaser
+    document.getElementById('startBtn').addEventListener('click', function() {
+      document.getElementById('page1').classList.add('hidden');
+      document.getElementById('page2').classList.remove('hidden');
+    });
+    
+    // Page 2 -> Page 3: Honeymoon Teaser to Travel Preference
+    document.getElementById('honeymoonBtn').addEventListener('click', function() {
+      document.getElementById('page2').classList.add('hidden');
+      document.getElementById('page3').classList.remove('hidden');
+    });
+    
+    // Page 3 -> Page 4: Travel Preference to Destination Options
+    document.getElementById('nextBtn').addEventListener('click', function() {
+      const travelOptions = document.getElementsByName('travel');
+      let selectedOption = '';
+      for (let i = 0; i < travelOptions.length; i++) {
+        if (travelOptions[i].checked) {
+          selectedOption = travelOptions[i].value;
+          break;
+        }
+      }
+      if (!selectedOption) {
+        alert('Please select a travel preference before proceeding.');
+        return;
+      }
+      document.getElementById('page3').classList.add('hidden');
+      document.getElementById('page4').classList.remove('hidden');
+      
+      // Show appropriate options based on travel selection
+      if (selectedOption === 'international') {
+        document.getElementById('internationalOptions').classList.remove('hidden');
+        document.getElementById('localOptions').classList.add('hidden');
+      } else {
+        document.getElementById('localOptions').classList.remove('hidden');
+        document.getElementById('internationalOptions').classList.add('hidden');
+      }
+    });
+    
+    // Function to trigger a single burst of confetti around the center of the container
+    function triggerPartyPoppers() {
+      confetti({
+        particleCount: 50,
+        spread: 80,
+        origin: { x: 0.5, y: 0.5 }
+      });
+    }
+    
+    // Submit International Destination Choice
+    document.getElementById('submitInternational').addEventListener('click', function() {
+      const intlChoices = document.getElementsByName('internationalChoice');
+      let selectedIntl = '';
+      for (let i = 0; i < intlChoices.length; i++) {
+        if (intlChoices[i].checked) {
+          selectedIntl = intlChoices[i].value;
+          break;
+        }
+      }
+      if (!selectedIntl) {
+        alert('Please select an international destination region before submitting.');
+        return;
+      }
+      document.getElementById('internationalOptions').classList.add('hidden');
+      const finalEl = document.getElementById('finalConfirmation');
+      finalEl.innerHTML = `
+        <h2>Thank You!</h2>
+        <p>You have chosen: <span style="color:#E91E63; font-weight:bold;">${selectedIntl}</span></p>
+        <p>Get ready, pack your bags, and embark on a fun adventure!</p>
+      `;
+      finalEl.classList.remove('hidden');
+      triggerPartyPoppers();
+    });
+    
+    // Submit Local Destination Choice
+    document.getElementById('submitLocal').addEventListener('click', function() {
+      const localChoices = document.getElementsByName('localChoice');
+      let selectedLocal = '';
+      for (let i = 0; i < localChoices.length; i++) {
+        if (localChoices[i].checked) {
+          selectedLocal = localChoices[i].value;
+          break;
+        }
+      }
+      if (!selectedLocal) {
+        alert('Please select a local destination before submitting.');
+        return;
+      }
+      document.getElementById('localOptions').classList.add('hidden');
+      const finalEl = document.getElementById('finalConfirmation');
+      finalEl.innerHTML = `
+        <h2>Thank You!</h2>
+        <p>You have chosen: <span style="color:#E91E63; font-weight:bold;">${selectedLocal}</span></p>
+        <p>Get ready, pack your bags, and embark on a fun adventure!</p>
+      `;
+      finalEl.classList.remove('hidden');
+      triggerPartyPoppers();
+    });
+  </script>
+</body>
+</html>
