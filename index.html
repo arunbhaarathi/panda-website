@@ -18,7 +18,6 @@
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      /* Removed overflow: hidden; to allow scrolling on smaller devices */
       overflow-y: auto;
     }
     /* Container with responsive sizing */
@@ -33,10 +32,12 @@
       position: relative;
       z-index: 1;
     }
+    h1, h2, h3, p {
+      margin-bottom: 15px;
+    }
     h1, h2 {
       font-family: 'Dancing Script', cursive;
       color: #D81B60;
-      margin-bottom: 15px;
       font-size: 2.5rem;
     }
     p {
@@ -44,7 +45,7 @@
       color: #555;
       line-height: 1.6;
     }
-    button {
+    button, a.button-link {
       display: block;
       width: 80%;
       margin: 20px auto;
@@ -52,26 +53,35 @@
       background-color: #FF4081;
       color: #fff;
       font-size: 1.125rem;
+      text-decoration: none;
+      text-align: center;
       border: none;
       border-radius: 25px;
       cursor: pointer;
       transition: background 0.3s;
       box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
     }
-    button:hover {
+    button:hover, a.button-link:hover {
       background-color: #E91E63;
     }
+    /* Options styling to align checkboxes and text */
     .options {
       margin: 20px 0;
+      text-align: left;
     }
     .options label {
       display: block;
-      margin: 12px 0;
-      font-size: 1.125rem;
+      position: relative;
+      padding-left: 40px; /* space for the checkbox */
+      margin-bottom: 10px;
       cursor: pointer;
+      line-height: 1.4;
     }
-    input[type="radio"] {
-      margin-right: 10px;
+    .options label input[type="checkbox"] {
+      position: absolute;
+      left: 0;
+      top: 0;
+      margin-top: 3px; /* vertical alignment adjustment */
     }
     .hidden {
       display: none;
@@ -83,13 +93,13 @@
       }
       p,
       .options label, 
-      button {
+      button, a.button-link {
         font-size: 1rem;
       }
       .container {
         padding: 20px;
       }
-      button {
+      button, a.button-link {
         width: 90%;
       }
     }
@@ -99,7 +109,7 @@
       }
       p,
       .options label, 
-      button {
+      button, a.button-link {
         font-size: 1.125rem;
       }
       .container {
@@ -109,7 +119,7 @@
   </style>
 </head>
 <body>
-  <!-- This canvas is optional; the library automatically creates one if needed -->
+  <!-- Optional canvas for confetti -->
   <canvas id="confetti-canvas" class="hidden"></canvas>
 
   <div class="container">
@@ -139,104 +149,143 @@
       <p>
         Ready to get started?
       </p>
-      <button id="honeymoonBtn">Get Started</button>
+      <button id="beginBtn">Get Started</button>
     </div>
     
-    <!-- Page 3: Travel Preference -->
+    <!-- Page 3: Question 1 - Scenic Shenanigans (Multi-Choice) -->
     <div id="page3" class="hidden">
-      <h2>Travel Preference</h2>
-      <p>Would you prefer traveling International or Local?</p>
+      <h2>Unleash Your Inner Honeymoon Rebel!</h2>
+      <h3>Scenic Shenanigans</h3>
+      <p>Which landscape makes you weak at the knees? (Select all that apply)</p>
       <div class="options">
         <label>
-          <input type="radio" name="travel" value="international"> International
+          <input type="checkbox" name="q1" value="beach">
+          <span><strong>Beachy Keen:</strong> Endless sandy shores and ocean breezes to get your toes in.</span>
         </label>
         <label>
-          <input type="radio" name="travel" value="local"> Local
+          <input type="checkbox" name="q1" value="hill">
+          <span><strong>Hill-Top Thrills:</strong> Rolling hills that promise scenic views—and maybe a little impromptu hilltop dancing.</span>
+        </label>
+        <label>
+          <input type="checkbox" name="q1" value="snow">
+          <span><strong>Snow Much Fun:</strong> A winter wonderland for those who like their romance with a side of frosty adventure.</span>
         </label>
       </div>
-      <button id="nextBtn">Next</button>
+      <button id="nextBtnQ1">Next</button>
     </div>
     
-    <!-- Page 4: Destination Options Based on Travel Preference -->
+    <!-- Page 4: Question 2 - Honeymoon Hijinks (Multi-Choice) -->
     <div id="page4" class="hidden">
-      <!-- International Options -->
-      <div id="internationalOptions" class="hidden">
-        <h2>International Options</h2>
-        <p>Please choose your preferred destination region:</p>
-        <div class="options">
-          <label><input type="radio" name="internationalChoice" value="Europe"> Europe</label>
-          <label><input type="radio" name="internationalChoice" value="Asia"> Asia</label>
-          <label><input type="radio" name="internationalChoice" value="America"> America</label>
-        </div>
-        <button id="submitInternational">Submit</button>
+      <h2>Honeymoon Hijinks</h2>
+      <p>How do you want to spend your post-wedding bliss? (Select all that apply)</p>
+      <div class="options">
+        <label>
+          <input type="checkbox" name="q2" value="couch">
+          <span><strong>Couch Potatoes Unite:</strong> Snuggle up in your room, order in, and let the world wait.</span>
+        </label>
+        <label>
+          <input type="checkbox" name="q2" value="cultural">
+          <span><strong>Cultural Crusaders:</strong> Roam the streets, get lost in local traditions, and maybe even learn a few saucy phrases.</span>
+        </label>
+        <label>
+          <input type="checkbox" name="q2" value="adrenaline">
+          <span><strong>Adrenaline Addicts:</strong> Seek thrills, dive into wild adventures, and make memories that will leave you laughing (and maybe a little out of breath).</span>
+        </label>
       </div>
-      <!-- Local Options -->
-      <div id="localOptions" class="hidden">
-        <h2>Local Options</h2>
-        <p>Please choose your preferred local destination:</p>
-        <div class="options">
-          <label><input type="radio" name="localChoice" value="CityA"> City A</label>
-          <label><input type="radio" name="localChoice" value="CityB"> City B</label>
-          <label><input type="radio" name="localChoice" value="CityC"> City C</label>
-        </div>
-        <button id="submitLocal">Submit</button>
-      </div>
-      <!-- Final Confirmation -->
-      <div id="finalConfirmation" class="hidden">
-        <!-- Final confirmation content will be populated dynamically -->
-      </div>
+      <button id="nextBtnQ2">Next</button>
     </div>
+    
+    <!-- Page 5: Question 3 - Indian Adventure Zones (Multi-Choice) -->
+    <div id="page5" class="hidden">
+      <h2>Indian Adventure Zones</h2>
+      <p>Which region of India tickles your fancy for a spicy escape? (Select all that apply)</p>
+      <div class="options">
+        <label>
+          <input type="checkbox" name="q3" value="northern">
+          <span><strong>Northern Nuances:</strong> Rugged mountains, ancient forts, and stories as tall as the peaks.</span>
+        </label>
+        <label>
+          <input type="checkbox" name="q3" value="southern">
+          <span><strong>Southern Sensations:</strong> Lush landscapes, serene coastlines, and a culinary scene that’s as rich as its history.</span>
+        </label>
+        <label>
+          <input type="checkbox" name="q3" value="eastern">
+          <span><strong>Eastern Escapades:</strong> A vibrant mix of culture, colors, and quirky local surprises.</span>
+        </label>
+        <label>
+          <input type="checkbox" name="q3" value="western">
+          <span><strong>Western Wonders:</strong> Diverse terrains that promise a cocktail of experiences—shaken, not stirred.</span>
+        </label>
+      </div>
+      <button id="nextBtnQ3">Next</button>
+    </div>
+    
+    <!-- Page 6: Question 4 - Lodging with Attitude (Multi-Choice) -->
+    <div id="page6" class="hidden">
+      <h2>Lodging with Attitude</h2>
+      <p>What’s your vibe when it comes to crashing for the night? (Select all that apply)</p>
+      <div class="options">
+        <label>
+          <input type="checkbox" name="q4" value="chic">
+          <span><strong>Chic Boutique:</strong> Intimate spaces that whisper luxury—and maybe a bit of mischief.</span>
+        </label>
+        <label>
+          <input type="checkbox" name="q4" value="all-inclusive">
+          <span><strong>All-Inclusive Extravaganza:</strong> Pampering to the max with zero worries (and plenty of room service perks).</span>
+        </label>
+        <label>
+          <input type="checkbox" name="q4" value="homestay">
+          <span><strong>Homestay with Heart:</strong> Cozy, quirky, and full of local flavor that feels like coming home.</span>
+        </label>
+      </div>
+      <button id="nextBtnQ4">Next</button>
+    </div>
+    
+    <!-- Page 7: Question 5 - Pace of the Playdate (Multi-Choice) -->
+    <div id="page7" class="hidden">
+      <h2>Pace of the Playdate</h2>
+      <p>How do you envision your getaway groove? (Select all that apply)</p>
+      <div class="options">
+        <label>
+          <input type="checkbox" name="q5" value="slow">
+          <span><strong>Slow &amp; Sultry:</strong> A laid-back escape where time takes a backseat to romance.</span>
+        </label>
+        <label>
+          <input type="checkbox" name="q5" value="fast">
+          <span><strong>Fast &amp; Furious:</strong> An itinerary packed with so much fun you’ll need to catch your breath.</span>
+        </label>
+        <label>
+          <input type="checkbox" name="q5" value="sweet">
+          <span><strong>Sweet Spot:</strong> A perfect blend of lazy mornings, wild afternoons, and steamy nights.</span>
+        </label>
+      </div>
+      <button id="nextBtnQ5">Next</button>
+    </div>
+    
+    <!-- Page 8: Final Confirmation with Message -->
+    <div id="page8" class="hidden">
+      <h2>Thank You!</h2>
+      <p>Your honeymoon adventure is all set. Here’s a summary of your choices:</p>
+      <div id="summary"></div>
+      <p>Get ready, pack your bags, and embark on a fun adventure!</p>
+      <p>
+        Due to budget constraints and complexity, we couldn't add a backend API to email the responses directly to us.
+        Please be a doll and kindly screenshot your responses and send them to us.
+      </p>
+      <button id="restartBtn">Restart</button>
+    </div>
+    
   </div>
   
   <!-- Load canvas-confetti library from CDN -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
-  
   <script>
-    // Utility: Random in range function
+    // Utility: Random in range function (for confetti, if needed)
     function randomInRange(min, max) {
       return Math.random() * (max - min) + min;
     }
     
-    // Page 1 -> Page 2: Welcome to Honeymoon Teaser
-    document.getElementById('startBtn').addEventListener('click', function() {
-      document.getElementById('page1').classList.add('hidden');
-      document.getElementById('page2').classList.remove('hidden');
-    });
-    
-    // Page 2 -> Page 3: Honeymoon Teaser to Travel Preference
-    document.getElementById('honeymoonBtn').addEventListener('click', function() {
-      document.getElementById('page2').classList.add('hidden');
-      document.getElementById('page3').classList.remove('hidden');
-    });
-    
-    // Page 3 -> Page 4: Travel Preference to Destination Options
-    document.getElementById('nextBtn').addEventListener('click', function() {
-      const travelOptions = document.getElementsByName('travel');
-      let selectedOption = '';
-      for (let i = 0; i < travelOptions.length; i++) {
-        if (travelOptions[i].checked) {
-          selectedOption = travelOptions[i].value;
-          break;
-        }
-      }
-      if (!selectedOption) {
-        alert('Please select a travel preference before proceeding.');
-        return;
-      }
-      document.getElementById('page3').classList.add('hidden');
-      document.getElementById('page4').classList.remove('hidden');
-      
-      // Show appropriate options based on travel selection
-      if (selectedOption === 'international') {
-        document.getElementById('internationalOptions').classList.remove('hidden');
-        document.getElementById('localOptions').classList.add('hidden');
-      } else {
-        document.getElementById('localOptions').classList.remove('hidden');
-        document.getElementById('internationalOptions').classList.add('hidden');
-      }
-    });
-    
-    // Function to trigger a single burst of confetti around the center of the container
+    // Function to trigger confetti
     function triggerPartyPoppers() {
       confetti({
         particleCount: 50,
@@ -245,54 +294,81 @@
       });
     }
     
-    // Submit International Destination Choice
-    document.getElementById('submitInternational').addEventListener('click', function() {
-      const intlChoices = document.getElementsByName('internationalChoice');
-      let selectedIntl = '';
-      for (let i = 0; i < intlChoices.length; i++) {
-        if (intlChoices[i].checked) {
-          selectedIntl = intlChoices[i].value;
-          break;
-        }
+    // Navigation functions
+    document.getElementById('startBtn').addEventListener('click', function() {
+      document.getElementById('page1').classList.add('hidden');
+      document.getElementById('page2').classList.remove('hidden');
+    });
+    
+    document.getElementById('beginBtn').addEventListener('click', function() {
+      document.getElementById('page2').classList.add('hidden');
+      document.getElementById('page3').classList.remove('hidden');
+    });
+    
+    // Helper functions for checkbox groups
+    function validateCheckboxes(questionName, alertMsg) {
+      const selected = document.querySelectorAll('input[name="' + questionName + '"]:checked');
+      if (selected.length === 0) {
+        alert(alertMsg);
+        return false;
       }
-      if (!selectedIntl) {
-        alert('Please select an international destination region before submitting.');
-        return;
-      }
-      document.getElementById('internationalOptions').classList.add('hidden');
-      const finalEl = document.getElementById('finalConfirmation');
-      finalEl.innerHTML = `
-        <h2>Thank You!</h2>
-        <p>You have chosen: <span style="color:#E91E63; font-weight:bold;">${selectedIntl}</span></p>
-        <p>Get ready, pack your bags, and embark on a fun adventure!</p>
+      return true;
+    }
+    
+    function getCheckboxSelections(questionName) {
+      const selections = Array.from(document.querySelectorAll('input[name="' + questionName + '"]:checked'));
+      return selections.map(el => el.parentNode.textContent.trim()).join(', ');
+    }
+    
+    document.getElementById('nextBtnQ1').addEventListener('click', function() {
+      if (!validateCheckboxes('q1', 'Please select at least one option for Scenic Shenanigans.')) return;
+      document.getElementById('page3').classList.add('hidden');
+      document.getElementById('page4').classList.remove('hidden');
+    });
+    
+    document.getElementById('nextBtnQ2').addEventListener('click', function() {
+      if (!validateCheckboxes('q2', 'Please select at least one option for Honeymoon Hijinks.')) return;
+      document.getElementById('page4').classList.add('hidden');
+      document.getElementById('page5').classList.remove('hidden');
+    });
+    
+    document.getElementById('nextBtnQ3').addEventListener('click', function() {
+      if (!validateCheckboxes('q3', 'Please select at least one option for Indian Adventure Zones.')) return;
+      document.getElementById('page5').classList.add('hidden');
+      document.getElementById('page6').classList.remove('hidden');
+    });
+    
+    document.getElementById('nextBtnQ4').addEventListener('click', function() {
+      if (!validateCheckboxes('q4', 'Please select at least one option for Lodging with Attitude.')) return;
+      document.getElementById('page6').classList.add('hidden');
+      document.getElementById('page7').classList.remove('hidden');
+    });
+    
+    document.getElementById('nextBtnQ5').addEventListener('click', function() {
+      if (!validateCheckboxes('q5', 'Please select at least one option for Pace of the Playdate.')) return;
+      // Compile summary of all choices
+      const summaryEl = document.getElementById('summary');
+      const q1 = getCheckboxSelections('q1');
+      const q2 = getCheckboxSelections('q2');
+      const q3 = getCheckboxSelections('q3');
+      const q4 = getCheckboxSelections('q4');
+      const q5 = getCheckboxSelections('q5');
+      
+      summaryEl.innerHTML = `
+        <p><strong>Scenic Shenanigans:</strong> ${q1}</p>
+        <p><strong>Honeymoon Hijinks:</strong> ${q2}</p>
+        <p><strong>Indian Adventure Zones:</strong> ${q3}</p>
+        <p><strong>Lodging with Attitude:</strong> ${q4}</p>
+        <p><strong>Pace of the Playdate:</strong> ${q5}</p>
       `;
-      finalEl.classList.remove('hidden');
+      document.getElementById('page7').classList.add('hidden');
+      document.getElementById('page8').classList.remove('hidden');
       triggerPartyPoppers();
     });
     
-    // Submit Local Destination Choice
-    document.getElementById('submitLocal').addEventListener('click', function() {
-      const localChoices = document.getElementsByName('localChoice');
-      let selectedLocal = '';
-      for (let i = 0; i < localChoices.length; i++) {
-        if (localChoices[i].checked) {
-          selectedLocal = localChoices[i].value;
-          break;
-        }
-      }
-      if (!selectedLocal) {
-        alert('Please select a local destination before submitting.');
-        return;
-      }
-      document.getElementById('localOptions').classList.add('hidden');
-      const finalEl = document.getElementById('finalConfirmation');
-      finalEl.innerHTML = `
-        <h2>Thank You!</h2>
-        <p>You have chosen: <span style="color:#E91E63; font-weight:bold;">${selectedLocal}</span></p>
-        <p>Get ready, pack your bags, and embark on a fun adventure!</p>
-      `;
-      finalEl.classList.remove('hidden');
-      triggerPartyPoppers();
+    // Restart the experience
+    document.getElementById('restartBtn').addEventListener('click', function() {
+      location.reload();
     });
   </script>
 </body>
